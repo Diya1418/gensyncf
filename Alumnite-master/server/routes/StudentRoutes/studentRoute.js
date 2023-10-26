@@ -24,8 +24,10 @@ router.post('/register', (req, res) => {
     let student = new Student(req.body)
     
     student.save().then(() => {
-        
         return student.generateAuthToken();
+    })
+    .then((token) => {
+        res.header('x-auth',token).send(student);
     })
     
     .catch((err) => {console.log(err);
@@ -47,17 +49,21 @@ router.post('/login', (req, res) => {
             }
             return student.generateAuthToken()
                 .then((token) => {
-                    res.status(200).header({'x-auth': token, 'access-control-expose-headers': 'x-auth'}).send({message: 'Login successful.'});
+                    console.log("token generated")
+                    //localStorage.setItem('token', token);
+                    res.status(200).header({'x-auth': token, 'access-control-expose-headers': 'x-auth'}).send({message: 'Login successful.', token:token});
+                    
                 });
         })
         .catch((err) => {
+            console.log("oopss");
             res.status(500).send(err)
         });
 });
 
-
 // me
 router.get('/profile', studentAuth ,(req, res) => {
+    console.log("req.student");
     res.send(req.student);
 })
 
@@ -66,10 +72,12 @@ router.patch('/profile', studentAuth, (req, res) => {
 
     Student
         .findByIdAndUpdate(
+
             {_id: student._id},  
             req.body,
             {new: true}  //Default value is False and it sends the old document. This statement means to send "new" (updated document) back, instead of old document.
-        )
+        
+            )
         .select('-tokens')
         .then((student) => {
             res.send(student);
@@ -152,6 +160,7 @@ router.get('/events/:id', studentAuth, (req, res) => {
             res.status(500).send(err);
         });
 });
+
 
 
 router.post('/attend-event/:id', studentAuth, (req, res) =>{

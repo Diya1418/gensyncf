@@ -85,7 +85,9 @@
 // export default Register;
 
 import React, { useState } from 'react';
-import axios from "axios"
+import axios from "axios";
+import {useNavigate} from 'react-router-dom';
+import Style from './register.module.css'
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -106,7 +108,7 @@ const RegisterForm = () => {
     },
     skills: [''], 
   });
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     
@@ -129,6 +131,8 @@ const RegisterForm = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
@@ -136,7 +140,9 @@ const RegisterForm = () => {
       .then((response) => {
         console.log('Registration successful:', response.data);
         // Handle success (e.g., show a success message or redirect)
+        navigate('/');
       })
+
       .catch((error) => {
         console.error('Error:', error);
         
@@ -167,134 +173,337 @@ const RegisterForm = () => {
 
   return (
     <>
-    <main>
-             <h1>Register Page</h1>
-            {/* <a href="/about">About</a>  anchor tag is avoided while linking as it will reload the page but its 
-         a single page application so no reloading needed but whenm reloads using a tag all the states will reintialised to very starting states which is not req */}
-          <Link to={'/'}>back</Link>
-    
-          </main>
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        name="email"
-        placeholder="Your email"
-        required
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        name="startYear"
-        placeholder="Start Year"
-        required
-        value={formData.startYear}
-        onChange={handleChange}
-      />
-      <input
-        type="number"
-        name="endYear"
-        placeholder="End Year"
-        required
-        value={formData.endYear}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="degree"
-        placeholder="Degree"
-        required
-        value={formData.degree}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="branch"
-        placeholder="Branch"
-        required
-        value={formData.branch}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="rollNumber"
-        placeholder="Roll Number"
-        required
-        value={formData.rollNumber}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="firstName"
-        placeholder="First Name"
-        required
-        value={formData.firstName}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="lastName"
-        placeholder="Last Name"
-        value={formData.lastName}
-        onChange={handleChange}
-      />
-       <input
+    <div className={Style.two}>
+    <img className={Style.wave} src="https://github.com/sefyudem/Responsive-Login-Form/blob/master/img/wave.png?raw=true"/>
+      <div className={Style.container}>
+      <div className={Style.img}>
+			<img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/82b8d8efd3b0ac6382b9d0d71a99c6cf9dcefa23/img/bg.svg"/>
+		</div>
+              {/* <h1 className={Style.heading}>Registration</h1> */}
+              
+              {/* <a href="/about">About</a>  anchor tag is avoided while linking as it will reload the page but its 
+          a single page application so no reloading needed but whenm reloads using a tag all the states will reintialised to very starting states which is not req */}
+            {/* <Link to={'/'}>back</Link> */}
+      
+          
+      <form onSubmit={handleSubmit}>
+        {/* <div className={Style.pic}>
+      <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/82b8d8efd3b0ac6382b9d0d71a99c6cf9dcefa23/img/avatar.svg"/>
+      </div> */}
+      <h1 className={Style.reg}>REGISTRATION PAGE</h1>
+      <div className={Style.mainuserinfo}>
+        
+            <div className={Style.userinputbox}>
+            {/* <label for="Email"></label> */}
+        <input
+          type="email"
+          name="email"
+          placeholder="Your email"
+          required
+          value={formData.email}
+          onChange={handleChange}
+        />
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          value={formData.password}
+          onChange={handleChange}
+        />
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
           type="number"
-          name="mobileNumber"
-          placeholder="Mobile Number"
-          value={formData.mobileNumber}
+          name="startYear"
+          placeholder="Start Year"
+          required
+          value={formData.startYear}
           onChange={handleChange}
         />
-       <input
-          type="text"
-          name="socialProfiles.linkedin"
-          placeholder="LinkedIn Profile"
-          value={formData.socialProfiles.linkedin}
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
+          type="number"
+          name="endYear"
+          placeholder="End Year"
+          required
+          value={formData.endYear}
           onChange={handleChange}
         />
+        </div>
+
+        <div className={Style.userinputbox}>
         <input
           type="text"
-          name="socialProfiles.github"
-          placeholder="GitHub Profile"
-          value={formData.socialProfiles.github}
+          name="degree"
+          placeholder="Degree"
+          required
+          value={formData.degree}
           onChange={handleChange}
         />
-         <input
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
           type="text"
-          name="imageUrl"
-          placeholder="Image URL"
-          value={formData.imageUrl}
+          name="branch"
+          placeholder="Branch"
+          required
+          value={formData.branch}
           onChange={handleChange}
         />
-         {formData.skills.map((skill, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              name={`skills[${index}]`}
-              placeholder="Skill"
-              value={skill}
-              required
-              onChange={(e) => handleSkillChange(e, index)}
-            />
-            <button type="button" onClick={() => removeSkill(index)}>
-              Remove Skill
-            </button>
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
+          type="text"
+          name="rollNumber"
+          placeholder="Roll Number"
+          required
+          value={formData.rollNumber}
+          onChange={handleChange}
+        />
+    </div>
+
+    <div className={Style.userinputbox}>
+        <input
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          required
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+        </div>
+
+        <div className={Style.userinputbox}>
+        <input
+            type="number"
+            name="mobileNumber"
+            placeholder="Mobile Number"
+            value={formData.mobileNumber}
+            onChange={handleChange}
+          />
           </div>
-        ))}
-        <button type="button" onClick={addSkill}>
-          Add Skill
-        </button>
-      <button type="submit">Register</button>
-    </form>
+
+          <div className={Style.userinputbox}>
+        <input
+            type="text"
+            name="socialProfiles.linkedin"
+            placeholder="LinkedIn Profile"
+            value={formData.socialProfiles.linkedin}
+            onChange={handleChange}
+          />
+          </div>
+
+          <div className={Style.userinputbox}>
+          <input
+            type="text"
+            name="socialProfiles.github"
+            placeholder="GitHub Profile"
+            value={formData.socialProfiles.github}
+            onChange={handleChange}
+          />
+          </div>
+
+          <div className={Style.userinputbox}>
+          <input
+            type="text"
+            name="imageUrl"
+            placeholder="Image URL"
+            value={formData.imageUrl}
+            onChange={handleChange}
+          />
+          </div>
+
+           {/* <div className={Style.genderdetailsbox}>
+            <span className={Style.gendertitle}>Gender</span>
+            <div className={style.gendercategory}>
+              <input type="radio" name="gender" id="male">
+              <label for="male">Male</label>
+              <input type="radio" name="gender" id="female">
+              <label for="female">Female</label>
+              <input type="radio" name="gender" id="other">
+              <label for="other">Other</label>
+            </div>  */}
+          {/* </div> */}
+
+          <div className={Style.userinputbox}>
+          {formData.skills.map((skill, index) => (
+            <div div key={index}>
+              <input
+                type="text"
+                name={`skills[${index}]`}
+                placeholder="Skill"
+                value={skill}
+                required
+                onChange={(e) => handleSkillChange(e, index)}
+              />
+              
+              <button type="button" onClick={() => removeSkill(index)}>
+                Remove Skill
+              </button>
+              </div>
+          ))}
+
+          </div>
+          <button className={Style.formsubmitbtn} type="button" onClick={addSkill}>
+            Add Skill
+          </button>
+        <button className={Style.formsubmitbtn} type="submit">Register</button>
+        </div>
+      </form>
+     </div>
+     </div>
+     
     </>
+
+    // <>
+    // <main>
+    //          <h1>Register Page</h1>
+    //         {/* <a href="/about">About</a>  anchor tag is avoided while linking as it will reload the page but its 
+    //      a single page application so no reloading needed but whenm reloads using a tag all the states will reintialised to very starting states which is not req */}
+    //       <Link to={'/'}>back</Link>
+    
+    //       </main>
+    // <form onSubmit={handleSubmit}>
+    //   <input
+    //     type="email"
+    //     name="email"
+    //     placeholder="Your email"
+    //     required
+    //     value={formData.email}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="password"
+    //     name="password"
+    //     placeholder="Password"
+    //     required
+    //     value={formData.password}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="number"
+    //     name="startYear"
+    //     placeholder="Start Year"
+    //     required
+    //     value={formData.startYear}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="number"
+    //     name="endYear"
+    //     placeholder="End Year"
+    //     required
+    //     value={formData.endYear}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="text"
+    //     name="degree"
+    //     placeholder="Degree"
+    //     required
+    //     value={formData.degree}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="text"
+    //     name="branch"
+    //     placeholder="Branch"
+    //     required
+    //     value={formData.branch}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="text"
+    //     name="rollNumber"
+    //     placeholder="Roll Number"
+    //     required
+    //     value={formData.rollNumber}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="text"
+    //     name="firstName"
+    //     placeholder="First Name"
+    //     required
+    //     value={formData.firstName}
+    //     onChange={handleChange}
+    //   />
+    //   <input
+    //     type="text"
+    //     name="lastName"
+    //     placeholder="Last Name"
+    //     value={formData.lastName}
+    //     onChange={handleChange}
+    //   />
+    //    <input
+    //       type="number"
+    //       name="mobileNumber"
+    //       placeholder="Mobile Number"
+    //       value={formData.mobileNumber}
+    //       onChange={handleChange}
+    //     />
+    //    <input
+    //       type="text"
+    //       name="socialProfiles.linkedin"
+    //       placeholder="LinkedIn Profile"
+    //       value={formData.socialProfiles.linkedin}
+    //       onChange={handleChange}
+    //     />
+    //     <input
+    //       type="text"
+    //       name="socialProfiles.github"
+    //       placeholder="GitHub Profile"
+    //       value={formData.socialProfiles.github}
+    //       onChange={handleChange}
+    //     />
+    //      <input
+    //       type="text"
+    //       name="imageUrl"
+    //       placeholder="Image URL"
+    //       value={formData.imageUrl}
+    //       onChange={handleChange}
+    //     />
+    //      {formData.skills.map((skill, index) => (
+    //       <div key={index}>
+    //         <input
+    //           type="text"
+    //           name={`skills[${index}]`}
+    //           placeholder="Skill"
+    //           value={skill}
+    //           required
+    //           onChange={(e) => handleSkillChange(e, index)}
+    //         />
+    //         <button type="button" onClick={() => removeSkill(index)}>
+    //           Remove Skill
+    //         </button>
+    //       </div>
+    //     ))}
+    //     <button type="button" onClick={addSkill}>
+    //       Add Skill
+    //     </button>
+    //   <button type="submit">Register</button>
+    // </form>
+    // </>
+
   );
 };
 

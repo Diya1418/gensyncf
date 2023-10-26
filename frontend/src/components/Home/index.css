@@ -1,54 +1,100 @@
 body {
-    margin: 0 auto;
-    padding: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-    background: #fff;
-    width: 90%;
-  }
-  .content {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .header {
-    font-size: 42px;
-  }
-  .img {
-    display: flex;
-    margin: 0 auto;
-    height: 40vh;
-    width: 80%;
-    border-radius: 5%;
-  }
-  .container {
-    margin: 0 auto;
-    width: 100%;
-    height: 80vh;
-    border-color: white;
-  }
-  .title {
-    margin-left: 50px;
-    width: 70%;
-    font-size: 30px;
-    padding: 20px;
-    border-radius: 5px;
-    font-size: 33px;
-  }
-  .description {
-    margin: 20px auto;
-    width: 80%;
-    font-size: 25px;
-    margin: 20px auto;
-  }
-  .slick-prev {
-    left: -52px !important;
-  }
-  .slick-next:before,
-  .slick-prev:before {
-    content: "" !important;
-  }
-  .next-slick-arrow,
-  .prev-slick-arrow {
-    color: #000000;
-    font-size: 45px;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  /* background: black; */
+  width: 100%;
+}
+.para{
+  color: #fff;
+  margin-left: 15%;
+  margin-right: 15%;
+  line-height: 1.5;
+}
+.content {
+  text-align: center;
+  margin-bottom: 30px;
+  background-color: black;
+}
+.content h1{
+  font-size: 70px;
+  font-weight: bolder;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 0;
+  padding-top: 50px;
+  margin-bottom: 0px;
+  /* padding-bottom: 20px; */
+  color: white;
+}
+.header {
+  font-size: 42px;
+}
+#img-slider {
+  display: flex;
+  margin: 0 auto;
+  height: 40vh;
+  width: 65%;
+  border-radius: 5%;
+}
+.img:hover{
+  box-shadow: 0 0 60px 0px rgb(246, 246, 246);
+}
+.container {
+  margin: 0 auto;
+  width: 100%;
+  height: 80vh;
+  border-color: black;
+  background-color: black;
+  padding-top: 20px;
+}
+.title {
+  margin-left: 50px;
+  width: 70%;
+  font-size: 30px;
+  padding: 20px;
+  padding-bottom: 0;
+  border-radius: 5px;
+  font-size: 33px;
+  color: white;
+}
+.description {
+  margin: 20px auto;
+  width: 80%;
+  font-size: 25px;
+  margin: 20px auto;
+  color: #fff;
+}
+.slick-prev {
+  left: -52px !important;
+}
+.image-bg{
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+}
+
+#first-part{
+display: flex;
+position: absolute;
+top: 50%;
+left: 30%;
+}
+.recruiters-container h2{
+color: #fff;
+display: flex;
+justify-content: center;
+align-items: center;
+font-weight: bolder;
+}
+/* #placement-data{
+width: 90%;
+margin-left: 5%;
+margin-right: 5%;
+margin-top: 2%;
+margin-bottom: 2%;
+} */
+.area{
+padding-top: 40px;
+}

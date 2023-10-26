@@ -1,10 +1,133 @@
-h1{
+/* .main {
+  position: relative;
+  text-align: center;
+  padding-top: 0;
+  padding: 80px 0;
+}
+
+
+
+.image-bg {
+  width: 100%;
+  height: auto;
+}
+
+.first-part h1 {
+  font-size: 2.5rem;
+  margin: 20px 0;
+} */
+
+.slider {
+  /* Add styles for your slider section here */
+}
+
+.recruiters-container {
+  background: black; /* A slightly darker green background color for recruiters container */
+  color: #fff; /* Text color */
+  padding: 40px 0;
+}
+
+.recruiters {
+  /* Add styles for your recruiters section here */
+}
+
+/* You can add more styles as needed */
+
+
+/* h1{
     font-size: 50px;
     text-align: center;
-}
+} */
 
 li{
     list-style: none;
     text-decoration: none;
     font-size: 20px;
+}
+.image{
+    width: 100%;
+
+}
+.main{
+    /* height: 400px; */
+    width: 100%;
+}
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.first-part h1{
+  position: absolute;
+  display: flex;
+  top: 2%;
+  left: 21%;
+  font-size: 80px;
+  padding: 80px 0;
+  z-index: 1;
+  color: #56362e;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* animation: fadeIn 1s ease-in-out; */
+  animation: zoomIn 1s ease-in-out; /* Zoom in */
+      animation-fill-mode: forwards;
+}
+
+.delay_zoom_out {
+  animation: zoomOut 1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 2s; /* Delay the zoom-out animation */
+}
+
+#loop{
+  display: flex;
+  position: absolute;
+  top: 23%;
+  height: 40%;
+  width: 100%;
+  font-size: 70px;
+  white-space: nowrap;
+  font-family: gilroy;
+}
+#loop>h1{
+  font-weight: bolder;
+  animation-name: anim;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  color: white;
+}
+#loop>h1>span{
+  -webkit-text-stroke: 1px black;
+  /* color: transparent; */
+  font-weight: 500;
+}
+@keyframes anim{
+  0%{
+      transform: translateX(0%);
+  }
+  100%{
+      transform: translateX(-100%);
+  }
+}
+#placement_data{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }

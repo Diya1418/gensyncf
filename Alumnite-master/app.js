@@ -27,7 +27,7 @@ mongoose.set('useFindAndModify', false);
 //         autoIndex: true
 //     }
 // );
-mongoose.connect('mongodb://localhost/ad',{
+mongoose.connect('mongodb://localhost/adminn',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4

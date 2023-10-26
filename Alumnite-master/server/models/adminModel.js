@@ -27,9 +27,9 @@ const AdminSchema = new mongoose.Schema({
             required:true
         }
     }],
-    events: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'Event' }
-    ]
+    // events: [
+    //     { type: mongoose.Schema.Types.ObjectId, ref: 'Event' }
+    // ]
 });
 
 
