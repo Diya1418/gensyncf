@@ -1,0 +1,16 @@
+footer {
+    width: 100vw;
+    background-color: var(--clr-bg);
+    color: var(--clr-text-main);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 0 1rem 0rem var(--clr-bg-contrast);
+    background-color: rgb(99, 99, 233);
+    margin-bottom: 0px;
+    
+}
+
+
+

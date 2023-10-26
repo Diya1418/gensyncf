@@ -5,6 +5,7 @@ import Notices from "./components/Notices/notices";
 import Events from "./components/Events/events";
 import Alumni from "./components/Alumni/alumni";
 import Home from "./components/Home/home";
+import Profile from "./components/Profile/profile";
 import Axios from "axios"; //used to send and rev=ceive req from backend
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import { useState,useEffect } from "react";
@@ -29,6 +30,7 @@ function App() {
       {path:'/Register', element:<Register/>},
       {path:'/notices', element:<Notices/>},
       {path:'/events', element:<Events/>},
+      {path:'/profile', element:<Profile/>},
 
     ],
   },
