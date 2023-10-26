@@ -1,7 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const ProfileImage_PATH = path.join('/uploads/users/profileImg');
 
 const _ = require('lodash');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join__dirname, '..' , ProfileImage_PATH);
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+  
+  const upload = multer({ storage: storage });
 
 const {
     Student,
@@ -19,9 +35,39 @@ const {studentAuth} = require('../../middleware/studentAuth.js');
  @Route: /register
  @Desc: Sign-up
 */
-router.post('/register', (req, res) => {
 
-    let student = new Student(req.body)
+
+
+router.post('/register',upload.single(ProfileImage_PATH), (req, res) => {
+
+    const { email, password, startYear, endYear, degree, branch, rollNumber, firstName, lastName, mobileNumber, socialProfiles, skills } = req.body;
+
+  // Extract the image data and content type
+  const profileImage = {
+    data: fs.readFileSync(req.file.path),
+    contentType: req.file.mimetype,
+  };
+
+  // Create a new student record with the image data
+  const newStudent = new Student({
+    email,
+    password,
+    startYear,
+    endYear,  
+    degree,
+    branch,
+    rollNumber,
+    firstName,
+    lastName,
+    mobileNumber,
+    socialProfiles,
+    skills,
+    profileImage, // Add the image data to the student record
+  });
+
+
+    // let student = new Student(req.body);
+
     
     student.save().then(() => {
         return student.generateAuthToken();

@@ -1,4 +1,7 @@
  import {Link} from 'react-router-dom';
+ import {useDropzone} from 'react-dropzone';
+ 
+ 
 // import React, { useState } from "react";
 // import axios from "axios"
 // import style from "./register.module.css";
@@ -101,16 +104,31 @@ const RegisterForm = () => {
     firstName: '',
     lastName: '',
     mobileNumber: '',
-    imageUrl: '',
+    Pimage: '',
     socialProfiles: {
       linkedin: '',
       github: '',
     },
     skills: [''], 
   });
+
+  // const [imageFile,setImageFile] = useState(null);
+
   
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, files } = e.target;
+
+    if(type === 'file' && name === 'Pimage'){
+      const file = files[0];
+      if(file){
+         const reader = new FileReader();
+         reader.onload = () => {
+            setFormData({...formData, [name]: reader.result })
+         }
+         reader.readAsDataURL(file);
+      }
+      // setImageFile(file);
+    }
     
     // setFormData({ ...formData, [name]: value });
     if (name.startsWith('socialProfiles.')) {
@@ -131,10 +149,45 @@ const RegisterForm = () => {
     }
   };
 
+  const handleImageChange = (e) => {
+    const { name, type, files } = e.target;
+  
+    if (type === 'file' && name === 'Pimage') {
+      const file = files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          // Set the file content as a data URL
+          setFormData({ ...formData, [name]: reader.result });
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
+  function dataURLtoBlob(dataURL) {
+    const parts = dataURL.split(';base64,');
+    const contentType = parts[0].split(':')[1];
+    const byteCharacters = atob(parts[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+  
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+  
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: contentType });
+  }
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const form = new formData;
+
+    // form.append('Pimage', dataURLtoBlob(formData.Pimage));
+
     axios
       .post('http://localhost:4000/student/register', formData)
       .then((response) => {
@@ -186,7 +239,7 @@ const RegisterForm = () => {
             {/* <Link to={'/'}>back</Link> */}
       
           
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="post" enctype="multipart/form-data">
         {/* <div className={Style.pic}>
       <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/82b8d8efd3b0ac6382b9d0d71a99c6cf9dcefa23/img/avatar.svg"/>
       </div> */}
@@ -321,7 +374,7 @@ const RegisterForm = () => {
             onChange={handleChange}
           />
           </div>
-
+{/* 
           <div className={Style.userinputbox}>
           <input
             type="text"
@@ -329,6 +382,17 @@ const RegisterForm = () => {
             placeholder="Image URL"
             value={formData.imageUrl}
             onChange={handleChange}
+          />
+          </div> */}
+
+          <div className={Style.userinputbox}>
+          <input
+            type="file"
+            name="Pimage"
+            placeholder="Profile Image"
+            // value={formData.Pimage}
+            onChange={handleImageChange}
+            accept='.jpg, .jpeg, image/png'
           />
           </div>
 

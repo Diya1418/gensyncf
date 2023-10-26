@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ad',{
+mongoose.connect('mongodb://localhost/da',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4

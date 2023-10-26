@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 
 const StudentSchema = new mongoose.Schema({
@@ -146,14 +149,32 @@ const StudentSchema = new mongoose.Schema({
             type: String
         }
     },
-    imageUrl: {
-        type: String
+    // imageUrl: {
+    //     type: String
+        
+    // },
+    Pimage: {
+        contentType: String,
+        data: Buffer
+        
     },
     skills: [{
         type: String,
         trim: true
     }]
 });
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join__dirname, '..' , AVATAR_PATH);
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+  
 
 
 StudentSchema.methods.generateAuthToken = function(){

@@ -5,11 +5,11 @@ import Notices from "./components/Notices/notices";
 import Events from "./components/Events/events";
 import Alumni from "./components/Alumni/alumni";
 import Home from "./components/Home/home";
-<<<<<<< HEAD
-import Profile from "./components/Profile/profile";
-=======
+// <<<<<<< HEAD
+// import Profile from "./components/Profile/profile";
+// =======
 import Profile from "./components/Profile/profile"
->>>>>>> upstream/main
+// >>>>>>> upstream/main
 import Axios from "axios"; //used to send and rev=ceive req from backend
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,15 +39,15 @@ function App() {
       {path:'/Register', element:<Register/>},
       {path:'/notices', element:<Notices/>},
       {path:'/events', element:<Events/>},
-<<<<<<< HEAD
-      {path:'/profile', element:<Profile/>},
-=======
+// <<<<<<< HEAD
+//       {path:'/profile', element:<Profile/>},
+// =======
       {path:'/profile', element:<Profile/>}
       // {path:'/profile',
       //  element:<PrivateRoute component={Profile} 
       //  isAuthenticated={isAuthenticated} /> },
 
->>>>>>> upstream/main
+// >>>>>>> upstream/main
 
     ],
   },
