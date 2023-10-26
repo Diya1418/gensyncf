@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/gensync',{
+mongoose.connect('mongodb://localhost/ad',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     family: 4

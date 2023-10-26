@@ -117,36 +117,36 @@ const AlumniSchema = new mongoose.Schema(
             type: Number
         },
 
-        location: {
-            city: {
-                type: String,
-                trim: true
-            },
-            state: {
-                type: String,
-                trim: true
-            },
-            country: {
-                type: String,
-                trim: true
-            },
-            coordinates:{
-                langitude: {
-                    type: Number
-                },
-                latitude:{
-                    type: Number
-                }
-            }
-        },
+        // location: {
+        //     city: {
+        //         type: String,
+        //         trim: true
+        //     },
+        //     state: {
+        //         type: String,
+        //         trim: true
+        //     },
+        //     country: {
+        //         type: String,
+        //         trim: true
+        //     },
+        //     coordinates:{
+        //         langitude: {
+        //             type: Number
+        //         },
+        //         latitude:{
+        //             type: Number
+        //         }
+        //     }
+        // },
         socialProfiles: {
-            facebook: {
-                type: String,
-                default: 'https://www.facebook.com/'
-            },
             linkedin: {
                 type: String,
                 default: 'https://www.linkedin.com/'
+            },
+            github: {
+                type: String,
+                default: 'https://www.github.com/'
             }
         },
         imageUrl: {
@@ -156,34 +156,34 @@ const AlumniSchema = new mongoose.Schema(
             type: String,
             trim: true
         }],
-        locationPoint: {
-            type: {
-                type: String,
-                default: 'Point',
-                required: true
-            },
-            coordinates: {
-                type: [Number],
-                default: [0, 0]
-            }
-        }
+        // locationPoint: {
+        //     type: {
+        //         type: String,
+        //         default: 'Point',
+        //         required: true
+        //     },
+        //     coordinates: {
+        //         type: [Number],
+        //         default: [0, 0]
+        //     }
+        // }
     },
     {timestamps: true}
 );
 
 
 AlumniSchema.methods.generateAuthToken = function(){
-    var alumni = this;
-    var access = 'auth';
+    let alumni = this;
+    let access = 'auth';
 
-    var payload = {
+    let payload = {
         _id: alumni._id.toHexString(), 
         access, 
         type: 'alumni'
     }   
 
 
-    var token = jwt.sign(payload, process.env.tokenSecretKey).toString();
+    let token = jwt.sign(payload, process.env.tokenSecretKey).toString();
 
     alumni.tokens.push({access, token});
 
@@ -194,8 +194,8 @@ AlumniSchema.methods.generateAuthToken = function(){
 }
 
 AlumniSchema.statics.findByToken = function(token){
-    var Alumni = this;
-    var decoded;
+    let Alumni = this;
+    let decoded;
 
     try {
         decoded = jwt.verify(token, process.env.tokenSecretKey);
@@ -212,7 +212,7 @@ AlumniSchema.statics.findByToken = function(token){
 }
 
 AlumniSchema.methods.removeToken = function(token){
-    var alumni = this;
+    let alumni = this;
 
     return alumni.update({
         $pull : {

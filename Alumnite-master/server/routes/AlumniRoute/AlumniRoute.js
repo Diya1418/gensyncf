@@ -55,7 +55,7 @@ router.post('/facebookLogin', async (req, res) => {
 
 router.post('/register', (req, res) => {
 
-    var alumni = new Alumni(req.body);
+    let alumni = new Alumni(req.body);
 
     alumni.education.push({
         "startYear": alumni.startYear.toString(),
@@ -79,7 +79,7 @@ router.post('/register', (req, res) => {
 //login
 router.post('/login', (req, res) => {
     
-    var {email, password} = _.pick(req.body, ['email', 'password']);
+    let {email, password} = _.pick(req.body, ['email', 'password']);
 
     Alumni.findOne({email, password}) 
         .then((alumni) => {
@@ -119,7 +119,7 @@ router.get('/profile', alumniAuth, (req, res) => {
 
 
 router.patch('/profile', alumniAuth, (req, res) => {
-    var alumni = req.alumni;
+    let alumni = req.alumni;
 
     Alumni
         .findByIdAndUpdate(
@@ -150,9 +150,9 @@ router.delete('/logout', alumniAuth, (req, res) => {
 
 // Fill profile
 router.post('/fill-profile', alumniAuth, (req, res) => {
-    var {education, work, mobileNumber, location} = _.pick(req.body, ['education', 'work', 'mobileNumber', 'location']);
+    let {education, work, mobileNumber, location} = _.pick(req.body, ['education', 'work', 'mobileNumber', 'location']);
 
-    var alumni = req.alumni;
+    let alumni = req.alumni;
     
     alumni.education = education;
     alumni.work = work;
@@ -213,7 +213,7 @@ router.get('/events', alumniAuth, (req, res) => {
 
 // For getting full profile of a particular event
 router.get('/events/:id', alumniAuth, (req, res) => {
-    var eventId = req.params.id;
+    let eventId = req.params.id;
     
     Event
         .findOne({
@@ -236,7 +236,7 @@ router.get('/events/:id', alumniAuth, (req, res) => {
 
 
 router.post('/events/attend/:id', alumniAuth, (req, res) =>{
-    var eventId = req.params.id;
+    let eventId = req.params.id;
 
     Event.findOne({
         _id: eventId,
@@ -270,9 +270,9 @@ router.post('/jobs', alumniAuth, (req, res) => {
 
     req.body.postedBy = req.alumni._id;
     req.body.collegeId = req.alumni.collegeId;
-    var job = new Job(req.body);
+    let job = new Job(req.body);
 
-    var keywords = [];
+    let keywords = [];
     keywords = keywords.concat(job.skillsRequired, job.qualification, job.company, job.industry, job.workTitle, job.typeOfJob);
     job.keywords = keywords;
 
@@ -288,7 +288,7 @@ router.post('/jobs', alumniAuth, (req, res) => {
 
 
 router.get('/jobs', alumniAuth, (req, res) => {
-    var params = {}
+    let params = {}
 
     params.collegeId = req.alumni.collegeId;
 
@@ -308,7 +308,7 @@ router.get('/jobs', alumniAuth, (req, res) => {
 
 
 router.get('/jobs/:id', alumniAuth, (req, res) => {
-    var jobId = req.params.id;
+    let jobId = req.params.id;
 
     Job 
         .findOne({
@@ -328,9 +328,9 @@ router.post('/interviews', alumniAuth, (req, res) => {
     req.body.postedBy = req.alumni._id;
     req.body.collegeId = req.alumni.collegeId;
 
-    var interview = new Interview(req.body);
+    let interview = new Interview(req.body);
 
-    var keywords = [];
+    let keywords = [];
     keywords = keywords.concat(
         interview.company, 
         interview.workTitle,
@@ -351,7 +351,7 @@ router.post('/interviews', alumniAuth, (req, res) => {
 
 
 router.get('/interviews', alumniAuth, (req, res) => {
-    var params = {};
+    let params = {};
 
     params.collegeId = req.alumni.collegeId;
 
@@ -370,7 +370,7 @@ router.get('/interviews', alumniAuth, (req, res) => {
 });
 
 router.get('/interviews/:id', alumniAuth, (req, res) => {
-    var interviewId = req.params.id;
+    let interviewId = req.params.id;
 
     Interview
         .findOne({
@@ -402,7 +402,7 @@ router.get('/newsletters', alumniAuth, (req, res) => {
 
 
 router.get('/newsletters/:id', alumniAuth, (req, res) => {
-    var newsletterId = req.params.id;
+    let newsletterId = req.params.id;
 
     NewsLetter
         .findOne({
@@ -423,7 +423,7 @@ router.post('/tickets', alumniAuth, (req, res) => {
     req.body.postedBy = req.alumni._id;
     req.body.collegeId = req.alumni.collegeId;
     console.log(req.body);
-    var ticket = new Ticket(req.body);
+    let ticket = new Ticket(req.body);
 
     ticket.save()
         .then((ticket) => {
@@ -482,7 +482,7 @@ router.get('/alumni', alumniAuth, (req, res) => {
 
 
 router.get('/alumni/:id', alumniAuth, (req, res) => {
-    var userId = req.params.id;
+    let userId = req.params.id;
 
     Alumni
         .findOne({
@@ -679,7 +679,7 @@ router.get('/chatrooms/:id', alumniAuth, (req, res) => {
 router.get('/stats', alumniAuth, async (req, res) => {
 
     try {
-        var stats = await Services.StatsService.fetchCollegeStats(req.alumni.collegeId);
+        let stats = await Services.StatsService.fetchCollegeStats(req.alumni.collegeId);
         res.send(stats);
     } catch (err) {
         console.log(err);

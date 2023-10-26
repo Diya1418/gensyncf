@@ -21,7 +21,7 @@ const {studentAuth} = require('../../middleware/studentAuth.js');
 */
 router.post('/register', (req, res) => {
 
-    var student = new Student(req.body)
+    let student = new Student(req.body)
     
     student.save().then(() => {
         
@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
 //login
 router.post('/login', (req, res) => {
     
-    var {email, password} = _.pick(req.body, ['email', 'password']);
+    let {email, password} = _.pick(req.body, ['email', 'password']);
 
     Student.findOne({email, password}) 
         .then((student) => {
@@ -62,7 +62,7 @@ router.get('/profile', studentAuth ,(req, res) => {
 })
 
 router.patch('/profile', studentAuth, (req, res) => {
-    var student = req.student;
+    let student = req.student;
 
     Student
         .findByIdAndUpdate(
@@ -94,9 +94,9 @@ router.delete('/logout', studentAuth, (req, res) => {
 
 // Fill profile
 router.post('/fill-profile', studentAuth, (req, res) => {
-    var {education, work, mobileNumber, location} = _.pick(req.body, ['education', 'work', 'mobileNumber', 'location']);
+    let {education, work, mobileNumber, location} = _.pick(req.body, ['education', 'work', 'mobileNumber', 'location']);
 
-    var student = req.student;
+    let student = req.student;
     
     student.education = education;
     student.work = work;
@@ -132,7 +132,7 @@ router.get('/events', studentAuth, (req, res) => {
 
 // For getting full profile of a particular event
 router.get('/events/:id', studentAuth, (req, res) => {
-    var eventId = req.params.id;
+    let eventId = req.params.id;
     
     Event
         .findOne({
@@ -166,7 +166,7 @@ router.post('/jobs', studentAuth, (req, res) => {
 
 
 router.get('/jobs', studentAuth, (req, res) => {
-    var params = {};
+    let params = {};
 
     params.collegeId = req.student.collegeId;
 
@@ -185,7 +185,7 @@ router.get('/jobs', studentAuth, (req, res) => {
 });
 
 router.get('/jobs/:id', studentAuth, (req, res) => {
-    var jobId = req.params.id;
+    let jobId = req.params.id;
 
     Job 
         .findOne({
@@ -207,7 +207,7 @@ router.post('/interviews', studentAuth, (req, res) => {
 
 
 router.get('/interviews', studentAuth, (req, res) => {
-    var params = {};
+    let params = {};
 
     params.collegeId = req.student.collegeId;
 
@@ -226,7 +226,7 @@ router.get('/interviews', studentAuth, (req, res) => {
 });
 
 router.get('/interviews/:id', studentAuth, (req, res) => {
-    var interviewId = req.params.id;
+    let interviewId = req.params.id;
 
     Interview
         .findOne({

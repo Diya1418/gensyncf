@@ -44,5 +44,8 @@
     "url": "https://github.com/JatinRanka/alumni-management-system/issues"
   },
   "homepage": "https://github.com/JatinRanka/alumni-management-system#readme",
-  "description": ""
+  "description": "Built a Project for Govt. of Goa as part of **Smart India Hackathon 2020 Finalist**.",
+  "directories": {
+    "test": "test"
+  }
 }

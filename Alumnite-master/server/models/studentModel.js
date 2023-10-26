@@ -157,10 +157,10 @@ const StudentSchema = new mongoose.Schema({
 
 
 StudentSchema.methods.generateAuthToken = function(){
-    var student = this;
-    var access = 'auth';
+    let student = this;
+    let access = 'auth';
 
-    var token = jwt.sign({_id: student._id.toHexString(), access, type: 'student'}, process.env.tokenSecretKey).toString();
+    let token = jwt.sign({_id: student._id.toHexString(), access, type: 'student'}, process.env.tokenSecretKey).toString();
 
     student.tokens.push({access, token});
 
@@ -170,8 +170,8 @@ StudentSchema.methods.generateAuthToken = function(){
 }
 
 StudentSchema.statics.findByToken = function(token){
-    var Student = this;
-    var decoded;
+    let Student = this;
+    let decoded;
 
     try {
         decoded = jwt.verify(token, process.env.tokenSecretKey);
@@ -187,7 +187,7 @@ StudentSchema.statics.findByToken = function(token){
 }
 
 StudentSchema.methods.removeToken = function(token){
-    var student = this;
+    let student = this;
 
     return student.update({
         $pull : {
